@@ -19,7 +19,6 @@ class RemoteService : Service() {
         }
 
         override fun setName(name: String) {
-            Log.e(TAG,name)
             userName = name
         }
 

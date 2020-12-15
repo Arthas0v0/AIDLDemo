@@ -14,12 +14,13 @@ class MainActivity : AppCompatActivity() {
     val TAG = MainActivity::class.java.simpleName
     private val mBinding :ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater); }
     lateinit var myBinder: ITestAidlInterface
-    val serviceConnection : ServiceConnection by lazy {
+    private val serviceConnection : ServiceConnection by lazy {
         object :ServiceConnection{
             override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
                myBinder =  ITestAidlInterface.Stub.asInterface(service)
-                myBinder.name = "李四"
                 Log.e(TAG,myBinder.name)
+                myBinder.name = "李四"
+                Log.e(TAG, myBinder.name)
             }
 
             override fun onServiceDisconnected(name: ComponentName?) {
