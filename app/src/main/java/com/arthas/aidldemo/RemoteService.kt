@@ -4,7 +4,9 @@ import android.app.Service
 import android.content.Intent
 import android.os.IBinder
 import android.util.Log
+
 val TAG = RemoteService::class.java.simpleName
+
 class RemoteService : Service() {
 
     override fun onBind(intent: Intent): IBinder {
@@ -13,14 +15,15 @@ class RemoteService : Service() {
     }
 
     class MyBinder : ITestAidlInterface.Stub() {
-        var userName = "张三"
-        override fun getName(): String {
-            return userName
+        private var person = Person("张三",18)
+        override fun setPerson(person: Person?) {
+            this.person = person!!
         }
 
-        override fun setName(name: String) {
-            userName = name
+        override fun getPerson(): Person {
+            return person
         }
+
 
     }
 }
