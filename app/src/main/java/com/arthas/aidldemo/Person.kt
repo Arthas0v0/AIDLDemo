@@ -3,11 +3,16 @@ package com.arthas.aidldemo
 import android.os.Parcel
 import android.os.Parcelable
 
-class Person(val name: String, val age: Int) : Parcelable {
+class Person(var name: String? = "", var age: Int = 0) : Parcelable {
+    constructor(parcel: Parcel) : this(
+        parcel.readString(),
+        parcel.readInt()
+    )
 
-
-    constructor(parcel: Parcel) : this(parcel.readString().toString(), parcel.readInt())
-
+    fun readFromParcel(reply: Parcel) {
+        name = reply.readString().toString()
+        age = reply.readInt()
+    }
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(name)
         parcel.writeInt(age)
@@ -18,7 +23,7 @@ class Person(val name: String, val age: Int) : Parcelable {
     }
 
     override fun toString(): String {
-        return "Person(name='$name', age=$age)"
+        return "Person(name=$name, age=$age)"
     }
 
     companion object CREATOR : Parcelable.Creator<Person> {
@@ -30,4 +35,6 @@ class Person(val name: String, val age: Int) : Parcelable {
             return arrayOfNulls(size)
         }
     }
+
+
 }
