@@ -18,18 +18,14 @@ class MainActivity : AppCompatActivity() {
         object : ServiceConnection {
             override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
                 myBinder = ITestAidlInterface.Stub.asInterface(service)
-                Log.e(TAG, myBinder.person.toString())
+                Log.e(TAG, System.currentTimeMillis().toString())
                 Person("张三", 10).let {
-                    myBinder.setInPerson(it)
-                    Log.e(TAG, it.name.toString())
+                    myBinder.setOnewayPerson(it)
+                    Log.e(TAG, System.currentTimeMillis().toString())
                 }
                 Person("张三", 10).let {
-                    myBinder.setOutPerson(it)
-                    Log.e(TAG, it.name.toString())
-                }
-                Person("张三", 10).let {
-                    myBinder.setInOutPerson(it)
-                    Log.e(TAG, it.name.toString())
+                    myBinder.setPerson(it)
+                    Log.e(TAG, System.currentTimeMillis().toString())
                 }
 
             }

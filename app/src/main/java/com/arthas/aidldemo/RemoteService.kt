@@ -16,15 +16,16 @@ class RemoteService : Service() {
 
     class MyBinder : ITestAidlInterface.Stub() {
         private var person:Person? = Person("张三",18)
-        override fun setInPerson(person: Person?) {
-           person?.name = "李四"
+        override fun setPerson(person: Person?) {
+            this.person = person
+            Thread.sleep(2000)
         }
-        override fun setOutPerson(person: Person?) {
-            person?.name = "李四"
+
+        override fun setOnewayPerson(person: Person?) {
+            this.person = person
+            Thread.sleep(2000)
         }
-        override fun setInOutPerson(person: Person?) {
-            person?.name = "李四"
-        }
+
         /*
         客户端测试版本
         override fun setInPerson(person: Person?) {
