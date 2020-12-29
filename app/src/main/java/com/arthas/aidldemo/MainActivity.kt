@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
     val TAG = MainActivity::class.java.simpleName
     private val mBinding :ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater); }
     lateinit var messenger: Messenger
-    val client:Messenger by lazy { Messenger(@SuppressLint("HandlerLeak")
+    val clientMessenger:Messenger by lazy { Messenger(@SuppressLint("HandlerLeak")
     object :Handler(){
         override fun handleMessage(msg: Message) {
            if (msg.what == SERVICE){
@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
                 messenger = Messenger(service)
                 messenger.send(Message.obtain().apply {
                     what = CLIENT
-                    replyTo = client
+                    replyTo = clientMessenger
                 })
             }
 
